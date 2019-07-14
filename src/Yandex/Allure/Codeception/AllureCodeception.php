@@ -246,8 +246,10 @@ class AllureCodeception extends Extension
                 $this->testInvocations[$testFullName] = 0;
             }
             $currentExample = $test->getMetadata()->getCurrent();
-            if ($currentExample && isset($currentExample['example']) ) {
-                $testName .= ' with data set #' . $this->testInvocations[$testFullName];
+            if (array_key_exists('post_name', $currentExample['example'])) {
+              $testName .= ': ' . $currentExample['example']['post_name'];
+            } else {
+              $testName .= ' with data set #' . $this->testInvocations[$testFullName];
             }
         } else if($test instanceof Gherkin) {
             $testName = $test->getMetadata()->getFeature();
