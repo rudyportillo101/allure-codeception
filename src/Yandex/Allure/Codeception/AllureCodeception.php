@@ -246,7 +246,7 @@ class AllureCodeception extends Extension
                 $this->testInvocations[$testFullName] = 0;
             }
             $currentExample = $test->getMetadata()->getCurrent();
-            if (array_key_exists('post_name', $currentExample['example'])) {
+            if ($currentExample && isset($currentExample['example']) && array_key_exists('post_name', $currentExample['example'])) {
               $testName .= ': ' . $currentExample['example']['post_name'];
             } else {
               $testName .= ' with data set #' . $this->testInvocations[$testFullName];
